@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liceo Quebrada Ganado</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="css/img/encabezado.jpg" alt="Encabezado del sitio" />
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="Menú principal">
+    <div class="nav-wrap">
+      <button class="menu-toggle" aria-label="Abrir menú">☰ Menú</button>
+
+      <ul class="menu" id="menu">
+        <li>
+          <a href="#" class="nav-link active" data-section="inicio">Inicio</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-section="grupos">Grupos</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-section="estudiantes">Estudiantes</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-section="plan-estudio">Plan de estudio</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-section="carga-academica">Carga académica</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-section="evaluaciones">Asistencia</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-section="reportes">Reportes</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <!-- INICIO -->
+    <section id="inicio" class="content-section active">
+      <img src="css/img/lqg.jpeg" alt="Fondo del Liceo Quebrada Ganado" class="fondo" />
+    </section>
+
+    <!-- GRUPOS -->
+    <section id="grupos" class="content-section">
+      <div class="panel">
+        <div class="panel-header">
+          <h1>Grupos</h1>
+          <p>Permite crear y editar secciones o grupos.</p>
+        </div>
+
+        <div class="cards-grid">
+          <div class="card">
+            <h2>Crear grupo</h2>
+            <form class="form-panel">
+              <label for="nivel">Nivel</label>
+              <select id="nivel" name="nivel">
+                <option>Sétimo</option>
+                <option>Octavo</option>
+                <option>Noveno</option>
+                <option>Décimo</option>
+                <option>Undécimo</option>
+              </select>
+
+              <label for="seccion">Sección</label>
+              <input type="text" id="seccion" name="seccion" placeholder="Ejemplo: 7-1" />
+
+              <button type="button">Guardar grupo</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Editar grupos</h2>
+            <ul class="list-panel">
+              <li>Sétimo</li>
+              <li>Octavo</li>
+              <li>Noveno</li>
+              <li>Décimo</li>
+              <li>Undécimo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- ESTUDIANTES -->
+    <section id="estudiantes" class="content-section">
+      <div class="panel">
+        <div class="panel-header">
+          <h1>Estudiantes</h1>
+          <p>Permite registrar, editar, eliminar, importar y exportar estudiantes.</p>
+        </div>
+
+        <div class="cards-grid">
+          <!-- FORMULARIO -->
+          <div class="card">
+            <h2>Registro de estudiantes</h2>
+
+            <form class="form-panel" id="student-form">
+              <input type="hidden" id="edit-index" value="" />
+
+              <label for="cedula">Cédula de identidad</label>
+              <input type="text" id="cedula" placeholder="Ejemplo: 123456789" />
+
+              <label for="nombre">Nombre completo del estudiante</label>
+              <input type="text" id="nombre" placeholder="Ejemplo: Juan Pérez López" />
+
+              <label for="seccion-estudiante">Sección</label>
+              <input type="text" id="seccion-estudiante" placeholder="Ejemplo: 10-2" />
+
+              <div class="button-group">
+                <button type="button" id="save-student-btn">Guardar estudiante</button>
+                <button type="button" id="update-student-btn" class="secondary-btn">Modificar estudiante</button>
+                <button type="button" id="clear-student-btn" class="danger-btn">Limpiar</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- IMPORTAR / EXPORTAR -->
+          <div class="card">
+            <h2>Importar y exportar</h2>
+
+            <form class="form-panel">
+              <label for="archivo">Importar desde archivo</label>
+              <input type="file" id="archivo" accept=".csv,.xlsx" />
+
+              <div class="button-group">
+                <button type="button" id="import-students-btn">Importar archivo</button>
+                <button type="button" id="export-students-btn" class="secondary-btn">Exportar lista</button>
+              </div>
+            </form>
+
+            <p class="card-text">
+              El archivo debe contener estas columnas:
+              <br>• Cédula de identidad
+              <br>• Nombre completo del estudiante
+              <br>• Sección
+            </p>
+          </div>
+        </div>
+
+        <div class="students-bottom">
+          <div class="card card-full">
+            <div class="table-header">
+              <h2>Lista de estudiantes</h2>
+
+              <div class="filter-inline">
+                <label for="filter-seccion">Filtrar por sección</label>
+                <select id="filter-seccion">
+                  <option value="todos">Todas</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="students-table">
+                <thead>
+                  <tr>
+                    <th>Cédula</th>
+                    <th>Nombre completo</th>
+                    <th>Sección</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="students-table-body">
+                  <tr>
+                    <td colspan="4">No hay estudiantes registrados.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAN DE ESTUDIO -->
+    <section id="plan-estudio" class="content-section">
+      <div class="panel">
+        <div class="panel-header">
+          <h1>Plan de estudio</h1>
+          <p>Administra asignaturas, distribución y organización académica.</p>
+        </div>
+
+        <div class="cards-grid">
+          <div class="card">
+            <h2>Registrar asignatura</h2>
+            <form class="form-panel">
+              <label for="asignatura">Nombre de la asignatura</label>
+              <input type="text" id="asignatura" placeholder="Ejemplo: Matemática" />
+
+              <label for="nivel-plan">Nivel</label>
+              <select id="nivel-plan">
+                <option>Sétimo</option>
+                <option>Octavo</option>
+                <option>Noveno</option>
+                <option>Décimo</option>
+                <option>Undécimo</option>
+              </select>
+
+              <button type="button">Guardar asignatura</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Opciones</h2>
+            <ul class="list-panel">
+              <li>Asignaturas</li>
+              <li>Distribución de lecciones</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARGA ACADÉMICA -->
+    <section id="carga-academica" class="content-section">
+      <div class="panel">
+        <div class="panel-header">
+          <h1>Carga académica</h1>
+          <p>Asigna docentes, horarios y secciones.</p>
+        </div>
+
+        <div class="cards-grid">
+          <div class="card">
+            <h2>Asignar docente</h2>
+            <form class="form-panel">
+              <label for="docente">Docente</label>
+              <input type="text" id="docente" placeholder="Nombre del docente" />
+
+              <label for="materia">Asignatura</label>
+              <input type="text" id="materia" placeholder="Asignatura" />
+
+              <label for="grupo-carga">Grupo</label>
+              <input type="text" id="grupo-carga" placeholder="Ejemplo: 10-2" />
+
+              <button type="button">Guardar asignación</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Opciones</h2>
+            <ul class="list-panel">
+              <li>Docentes por asignatura</li>
+              <li>Horario institucional</li>
+              <li>Secciones asignadas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVALUACIONES -->
+    <!-- ASISTENCIA -->
+      <section id="evaluaciones" class="content-section">
+        <div class="panel">
+          <div class="panel-header">
+            <h1>Asistencia</h1>
+            <p>Permite al docente registrar la asistencia de los estudiantes según la sección, asignatura y horario correspondiente.</p>
+          </div>
+
+          <div class="cards-grid">
+            <div class="card">
+              <h2>Datos de la lección</h2>
+
+              <form class="form-panel">
+                <label for="asistencia-seccion">Sección</label>
+                <select id="asistencia-seccion">
+                  <option value="">Seleccione una sección</option>
+                  <option value="7-1">7-1</option>
+                  <option value="7-2">7-2</option>
+                  <option value="8-1">8-1</option>
+                  <option value="8-2">8-2</option>
+                  <option value="9-1">9-1</option>
+                  <option value="10-1">10-1</option>
+                  <option value="10-2">10-2</option>
+                  <option value="11-1">11-1</option>
+                </select>
+
+                <label for="asistencia-asignatura">Asignatura</label>
+                <select id="asistencia-asignatura">
+                  <option value="">Seleccione una asignatura</option>
+                  <option value="Español">Español</option>
+                  <option value="Matemática">Matemática</option>
+                  <option value="Ciencias">Ciencias</option>
+                  <option value="Estudios Sociales">Estudios Sociales</option>
+                  <option value="Inglés">Inglés</option>
+                  <option value="Informática">Informática</option>
+                </select>
+
+                <label for="asistencia-horario">Horario</label>
+                <select id="asistencia-horario">
+                  <option value="">Seleccione un horario</option>
+                  <option value="07:00 - 07:40">07:00 - 07:40</option>
+                  <option value="07:40 - 08:20">07:40 - 08:20</option>
+                  <option value="08:20 - 09:00">08:20 - 09:00</option>
+                  <option value="09:20 - 10:00">09:20 - 10:00</option>
+                  <option value="10:00 - 10:40">10:00 - 10:40</option>
+                  <option value="10:40 - 11:20">10:40 - 11:20</option>
+                </select>
+
+                <label for="asistencia-fecha">Fecha</label>
+                <input type="date" id="asistencia-fecha" />
+
+                <button type="button" id="cargar-asistencia-btn">Cargar estudiantes</button>
+              </form>
+            </div>
+
+            <div class="card">
+              <h2>Indicaciones</h2>
+              <p class="card-text">
+                Seleccione la sección, la asignatura, el horario y la fecha de la lección.
+                Luego cargue la lista de estudiantes para marcar su asistencia.
+              </p>
+
+              <ul class="list-panel">
+                <li>Presente</li>
+                <li>Ausente</li>
+                <li>Llegada tardía</li>
+                <li>Justificado</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="students-bottom">
+            <div class="card card-full">
+              <div class="table-header">
+                <h2>Registro de asistencia</h2>
+              </div>
+
+              <div class="table-wrap">
+                <table class="students-table">
+                  <thead>
+                    <tr>
+                      <th>Cédula</th>
+                      <th>Nombre completo</th>
+                      <th>Sección</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody id="attendance-table-body">
+                    <tr>
+                      <td colspan="4">Seleccione los datos de la lección y cargue los estudiantes.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="button-group" style="margin-top: 20px;">
+                <button type="button" id="guardar-asistencia-btn">Guardar asistencia</button>
+                <button type="button" id="limpiar-asistencia-btn" class="danger-btn">Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- REPORTES -->
+    <!-- REPORTES DE ASISTENCIA -->
+      <section id="reportes" class="content-section">
+        <div class="panel">
+          <div class="panel-header">
+            <h1>Reportes de asistencia</h1>
+            <p>Permite consultar y analizar la asistencia general, por estudiante, por sección, por asignatura y por rango de fechas.</p>
+          </div>
+
+          <div class="cards-grid">
+            <!-- FILTROS -->
+            <div class="card">
+              <h2>Filtros del reporte</h2>
+
+              <form class="form-panel">
+                <label for="tipo-reporte">Tipo de reporte</label>
+                <select id="tipo-reporte">
+                  <option value="general">Asistencia general</option>
+                  <option value="estudiante">Por estudiante</option>
+                  <option value="seccion">Por sección</option>
+                  <option value="asignatura">Por asignatura</option>
+                  <option value="fechas">Por rango de fechas</option>
+                  <option value="ausentismo">Ausentismo recurrente</option>
+                </select>
+
+                <label for="reporte-estudiante">Estudiante</label>
+                <input type="text" id="reporte-estudiante" placeholder="Nombre o cédula del estudiante" />
+
+                <label for="reporte-seccion">Sección</label>
+                <select id="reporte-seccion">
+                  <option value="">Todas</option>
+                  <option value="7-1">7-1</option>
+                  <option value="7-2">7-2</option>
+                  <option value="8-1">8-1</option>
+                  <option value="8-2">8-2</option>
+                  <option value="9-1">9-1</option>
+                  <option value="10-1">10-1</option>
+                  <option value="10-2">10-2</option>
+                  <option value="11-1">11-1</option>
+                </select>
+
+                <label for="reporte-asignatura">Asignatura</label>
+                <select id="reporte-asignatura">
+                  <option value="">Todas</option>
+                  <option value="Español">Español</option>
+                  <option value="Matemática">Matemática</option>
+                  <option value="Ciencias">Ciencias</option>
+                  <option value="Estudios Sociales">Estudios Sociales</option>
+                  <option value="Inglés">Inglés</option>
+                  <option value="Informática">Informática</option>
+                </select>
+
+                <label for="fecha-inicial">Fecha inicial</label>
+                <input type="date" id="fecha-inicial" />
+
+                <label for="fecha-final">Fecha final</label>
+                <input type="date" id="fecha-final" />
+
+                <div class="button-group">
+                  <button type="button" id="generar-reporte-btn">Generar reporte</button>
+                  <button type="button" id="exportar-reporte-btn" class="secondary-btn">Exportar reporte</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- OPCIONES -->
+            <div class="card">
+              <h2>Tipos de reporte</h2>
+              <ul class="list-panel">
+                <li>Asistencia general</li>
+                <li>Asistencia por estudiante</li>
+                <li>Asistencia por sección</li>
+                <li>Asistencia por asignatura</li>
+                <li>Asistencia por rango de fechas</li>
+                <li>Ausentismo recurrente</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- RESUMEN -->
+          <div class="students-bottom">
+            <div class="card card-full">
+              <h2>Resumen del reporte</h2>
+
+              <div class="report-summary-grid">
+                <div class="summary-box">
+                  <span class="summary-label">Presentes</span>
+                  <strong id="total-presentes">0</strong>
+                </div>
+
+                <div class="summary-box">
+                  <span class="summary-label">Ausentes</span>
+                  <strong id="total-ausentes">0</strong>
+                </div>
+
+                <div class="summary-box">
+                  <span class="summary-label">Tardías</span>
+                  <strong id="total-tardias">0</strong>
+                </div>
+
+                <div class="summary-box">
+                  <span class="summary-label">Justificados</span>
+                  <strong id="total-justificados">0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TABLA -->
+          <div class="students-bottom">
+            <div class="card card-full">
+              <h2>Detalle del reporte</h2>
+
+              <div class="table-wrap">
+                <table class="students-table">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Estudiante</th>
+                      <th>Sección</th>
+                      <th>Asignatura</th>
+                      <th>Horario</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody id="report-table-body">
+                    <tr>
+                      <td colspan="6">Seleccione los filtros y genere un reporte.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 – Ministerio de Educación Pública – Costa Rica</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
